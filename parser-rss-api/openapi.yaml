@@ -1,0 +1,293 @@
+openapi: 3.1.0
+info:
+  title: RSS Parser API
+  version: 3.5.1
+  description: RSS Parser gets posts acoding CRON scheduler and put new posts into DB. 
+servers:
+- url: /
+tags:
+  - name: posts
+    description: Parse, add, create, store, update, remove
+  - name: user
+    description: Operations about user
+paths:
+  /posts/:
+    get:
+      summary: Returns a list of posts.
+      tags:
+        - posts
+      description: Get all posts from DB. Implemented query for paginations, number of pages, sort, finding by name
+      parameters:
+        - in: query
+          schema:
+          name: title
+          example: = 1        
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: OK
+                  data:
+                    type: array 
+                    items: 
+                      type: object
+        5XX:
+          description: FAILED
+          content:
+            application/json:
+                properties:
+                  status: 
+                    type: string
+                    example: FAILED
+                  data:
+                    type: object
+                    properties:
+                      error:
+                        type: string 
+  /posts/{id}:
+    get:
+      summary: Returns post by id.
+      tags:
+        - posts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Get Post by id
+          example: 59e6187f-ceda-4cb3-b684-3f9c4970c99c
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: OK
+                  data:
+                    type: array
+                    items:
+                      type: object
+    post:
+      summary: Add post.
+      tags:
+        - posts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Get Post by id
+          example: 59e6187f-ceda-4cb3-b684-3f9c4970c99c      
+      requestBody:
+        description: Add post.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schema/Post"
+              required:
+                - data
+              properties:
+                data:
+                  type: object
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: OK
+                  data:
+                    type: array
+                    items:
+                      type: object
+    patch:
+      summary: Update post by id.
+      tags:
+        - posts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Post id
+          example: 89c3920b-9085-4bb8-8afd-f1d0f0a07deb
+      requestBody:
+        description: Update post.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schema/Post"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                    example: OK
+                  data:
+                    type: array
+                    items:
+                      type: object
+    delete:
+      summary: Delete post.
+      tags:
+        - posts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Post ID
+          example: 89c3920b-9085-4bb8-8afd-f1d0f0a07deb
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: OK
+                  data:
+                    type: array
+                    items:
+                      type: object
+
+  /auth/signin:
+    post:
+      tags:
+        - user
+      summary: Logs user into the system
+      description: ''
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schema/UserLog"
+              required:
+                - data
+              properties:
+                data:
+                  type: object
+      responses:
+        '200':
+          description: successful operation
+          headers:
+            X-Expires-After:
+              description: date in UTC when token expires
+              schema:
+                type: string
+                format: date-time
+          responses:
+            default:
+              description: successful operation
+              content:
+                application/json:
+        '400':
+          description: Invalid username/password supplied
+  /auth/signup:
+    post:
+      tags:
+        - user
+      summary: Add user
+      description: Create user and asign role "user"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schema/User"
+              required:
+                - data
+              properties:
+                data:
+                  type: object
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+components:
+  schema:
+    Post:
+      type: object
+      properties: 
+        id:
+          type: string
+          example: 59e6187f-ceda-4cb3-b684-3f9c4970c99c   
+        creator: 
+          type: string
+          example: Beth Skwarecki
+        title:
+          type: string
+          example: Should You Get a Rowing Machine?
+        categories:
+          type: array
+          items:
+            type: string
+            example: ["creaming", "bake"]
+        content:
+          type: string
+          example: Read more...
+        contentSnippet:
+          type: string
+          example: Read more... 
+        pubDate:
+          type: string
+          example: "Thu, 29 Sep 2022 16:00:00 +0000"
+
+          
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+          example: john
+        email:
+          type: string
+          example: john@email.com
+        password:
+          type: string
+          example: "12345"
+    UserLog:
+      type: object
+      properties:
+        username:
+          type: string
+          example: tom
+        password:
+          type: string
+          example: "123456789"
+      
+
+
+
+
+                      

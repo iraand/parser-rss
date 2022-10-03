@@ -1,0 +1,185 @@
+@import-normalize;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "~antd/dist/antd.css";
+
+.ant-table-wrapper {
+ margin: 40px 0;
+}
+section {
+ min-height: 100vh !important;
+}
+.ant-layout-content {
+ padding: 20px 60px;
+}
+.conteiner {
+ margin: 30px auto;
+ max-width: 1900px;
+}
+.post-conteiner {
+ max-width: 900px;
+}
+.list {
+ text-align: left;
+ max-width: 70%;
+ margin: auto;
+}
+
+.submit-form {
+ max-width: 300px;
+ margin: auto;
+}
+
+.edit-form {
+ max-width: 300px;
+ margin: auto;
+}
+
+.nav-link.selected {
+ font-weight: 700;
+}
+.title {
+ float: left;
+ margin-right: 50px;
+ font-size: 16px;
+}
+.title a {
+ color: white;
+}
+.ant-menu-title-content a {
+ display: inline-block;
+}
+.ant-menu-item-icon svg {
+ display: inline-block;
+ margin-top: -6px;
+}
+.ant-collapse-header {
+ background-color: #e8edf6;
+ font-weight: 500;
+ font-size: 15px;
+}
+.ant-collapse-extra {
+ color: grey;
+ font-size: 12px;
+}
+
+#buttons svg {
+ margin-top: -6px;
+}
+.ant-btn-primary {
+ background-color: #1890ff;
+}
+.ant-btn-primary:hover {
+ background-color: rgb(24, 144, 255 / 0.3);
+}
+.post-link {
+ color: grey;
+ display: block;
+ width: 100px;
+}
+.post-snippet {
+ margin: 10px 0 30px;
+ cursor: pointer;
+}
+.ant-pagination {
+ margin: 70px auto !important;
+}
+
+textarea#content {
+ min-height: 400px !important;
+}
+textarea#contentSnippet {
+ min-height: 200px !important;
+}
+
+label {
+ display: block;
+ margin-top: 30px !important;
+ color: grey !important;
+ font-size: 15px;
+ font-style: italic;
+}
+input#title,
+input#creator {
+ height: 50px;
+}
+#button-add {
+ margin: 40px auto !important;
+ display: block;
+}
+.ant-layout-header {
+ padding: 0 80px !important;
+}
+.icon-sort svg {
+ margin-top: -4px;
+ fill: grey;
+}
+.icon-sort {
+ font-size: 23px;
+}
+.top-section {
+ display: flex;
+ justify-content: flex-end;
+}
+
+.find-section {
+ display: flex;
+ margin-right: 50px;
+}
+.select {
+ width: 400px;
+}
+.ant-form-item-required{
+  margin: 0!important;
+}
+#basic{
+  margin:0 auto;
+  justify-content: center;
+  display: flex;  
+  flex-direction: column;
+}
+.logout{
+  position:absolute;
+  right:20px;
+  top:20px;
+  border:none;
+}
+.logout:hover{
+  background-color: transparent;
+  transform: scale(1.1);
+}
+.logout:active, .logout:focus{
+  background-color: transparent;
+}
+.anticon-logout svg{
+  fill:white;
+  font-size: 20px;
+}
+@media screen and (max-width: 900px) {
+ #buttons {
+  display: flex;
+  flex-direction: column;
+ }
+ .select {
+  width: 220px;
+ }
+ .find-section {
+  margin-right: 10px;
+ }
+ .ant-layout-content {
+  padding: 10px;
+ }
+}
+
+@media screen and (max-width: 600px) {
+ .ant-layout-header {
+  height: 150px !important;
+  padding: 0 30px !important;
+ }
+
+ .title {
+  float: none;
+  font-size: 20px;
+ }
+}
