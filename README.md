@@ -28,7 +28,7 @@ You should be able to run the following and see version information.
 ```bash
 docker compose version
 ```
-Run the Docker:
+Run the container:
 
 ```bash
 docker container run -d nginx
